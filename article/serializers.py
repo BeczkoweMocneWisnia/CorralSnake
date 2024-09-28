@@ -1,8 +1,11 @@
 from rest_framework import serializers
 
 from article.models import Article
-from article.views import User
 from user.serializers import FriendSerializer
+from django.contrib.auth import get_user_model
+
+
+User = get_user_model()
 
 
 class ArticleSerializer(serializers.ModelSerializer):
