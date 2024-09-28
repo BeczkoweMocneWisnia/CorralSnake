@@ -1,13 +1,22 @@
 from rest_framework import serializers
 
 from article.models import Article
+from article.views import User
+from user.serializers import FriendSerializer
 
 
 class ArticleSerializer(serializers.ModelSerializer):
+    author = FriendSerializer(many=False, read_only=True)
+    author_pk = serializers.SlugRelatedField(
+        source='place', queryset=User.objects.all(), slug_field='pk', write_only=True
+    )
+
     class Meta:
         model = Article
         fields = ['public_id',
                   'title',
                   'description',
-                  'image']
+                  'image',
+                  'author',
+                  'author_pk']
         read_only_fields = ['public_id']
