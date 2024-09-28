@@ -1,15 +1,17 @@
+from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
 from article.models import Article
 from quiz.models import Quiz, SubmittedAnswer, QuestionAnswer, Question
 from user.serializers import FriendSerializer
 
+User = get_user_model()
+
 
 class QuizSerializer(serializers.ModelSerializer):
     author = FriendSerializer(many=False, read_only=True)
-    article = serializers.SlugRelatedField(
-        queryset=Article.objects.all(),
-        slug_field='public_id'
+    author_pk = serializers.SlugRelatedField(
+        source='author', queryset=User.objects.all(), slug_field='pk', write_only=True
     )
 
     class Meta:
@@ -17,6 +19,7 @@ class QuizSerializer(serializers.ModelSerializer):
         fields = [
             'public_id',
             'author',
+            'author_pk'
             'title',
             'description',
             'image',
