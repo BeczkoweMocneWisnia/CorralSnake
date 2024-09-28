@@ -11,6 +11,7 @@ from user.managers import CustomUserManager
 USER_ROLES = {
     "Teacher": "Teacher",
     "Student": "Student",
+    "Other": "Other",
 }
 
 
