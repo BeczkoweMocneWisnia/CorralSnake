@@ -22,7 +22,7 @@ class ArticleViewSet(viewsets.ModelViewSet):
         """
         Creates a new article. Only accessible by users with the 'TeacherOnly' permission.
         """
-        serializer = self.get_serializer(data=request.data.dict() | {'author_pk': request.user.pk})
+        serializer = self.get_serializer(data=request.data | {'author_pk': request.user.pk})
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         return Response(serializer.data, status=status.HTTP_201_CREATED)

@@ -10,7 +10,7 @@ class Article(models.Model):
     author = models.ForeignKey('user.User', on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     description = models.TextField(max_length=10000)
-    image = models.ImageField(upload_to=uuid_upload_to('article/images'))
+    image = models.ImageField(upload_to=uuid_upload_to('article/images'), null=True)
 
     def __str__(self):
         return f'{self.title} - {self.author.email}'

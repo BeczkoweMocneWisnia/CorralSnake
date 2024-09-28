@@ -7,13 +7,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('user', '0002_alter_user_pfp'),
+        ('article', '0003_alter_article_image'),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='user',
-            name='pfp',
-            field=models.ImageField(default='defaults/pfps/default.png', upload_to=CorralSnake.utils.uuid_upload_to),
+            model_name='article',
+            name='image',
+            field=models.ImageField(null=True, upload_to=CorralSnake.utils.uuid_upload_to),
         ),
     ]

@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
 from article.models import Article
+from article.serializers import ArticleSerializer
 from quiz.models import Quiz, SubmittedAnswer, QuestionAnswer, Question
 from user.serializers import FriendSerializer
 
@@ -14,16 +15,22 @@ class QuizSerializer(serializers.ModelSerializer):
         source='author', queryset=User.objects.all(), slug_field='pk', write_only=True
     )
 
+    article = ArticleSerializer(many=False, read_only=True)
+    article_public_id = serializers.SlugRelatedField(
+        source='article', queryset=Article.objects.all(), slug_field='public_id', write_only=True
+    )
+
     class Meta:
         model = Quiz
         fields = [
             'public_id',
             'author',
-            'author_pk'
+            'author_pk',
             'title',
             'description',
             'image',
             'article',
+            'article_public_id'
         ]
         read_only_fields = ['public_id']
 
@@ -43,9 +50,9 @@ class QuestionBasicSerializer(serializers.ModelSerializer):
 
 
 class QuestionSerializer(QuestionBasicSerializer):
-    quiz = serializers.SlugRelatedField(
-        queryset=Quiz.objects.all(),
-        slug_field='public_id'
+    quiz = ArticleSerializer(many=False, read_only=True)
+    quiz_public_id = serializers.SlugRelatedField(
+        source='quiz', queryset=Quiz.objects.all(), slug_field='public_id', write_only=True
     )
 
     class Meta:
@@ -53,6 +60,7 @@ class QuestionSerializer(QuestionBasicSerializer):
         fields = [
             'public_id',
             'quiz',
+            'quiz_public_id',
             'title',
             'description',
             'image',
@@ -74,9 +82,9 @@ class QuestionAnswerBasicSerializer(serializers.ModelSerializer):
 
 
 class QuestionAnswerSerializer(QuestionAnswerBasicSerializer):
-    question = serializers.SlugRelatedField(
-        queryset=Question.objects.all(),
-        slug_field='public_id'
+    question = QuestionSerializer(many=False, read_only=True)
+    question_public_id = serializers.SlugRelatedField(
+        source='question', queryset=Question.objects.all(), slug_field='public_id', write_only=True
     )
 
     class Meta:
@@ -86,6 +94,7 @@ class QuestionAnswerSerializer(QuestionAnswerBasicSerializer):
             'question',
             'value',
             'question',
+            'question_public_id'
         ]
         read_only_fields = ['public_id']
 
@@ -100,12 +109,14 @@ class SubmitterAnswerBasicSerializer(serializers.ModelSerializer):
         read_only_fields = ['public_id']
 
 
-class SubmitterAnswerSerializer(serializers.ModelSerializer):
-    question = serializers.SlugRelatedField(
-        queryset=Question.objects.all(),
-        slug_field='public_id'
+class SubmittedAnswerSerializer(SubmitterAnswerBasicSerializer):
+    question = QuestionSerializer(many=False, read_only=True)
+    question_public_id = serializers.SlugRelatedField(
+        source='question', queryset=Question.objects.all(), slug_field='public_id', write_only=True
     )
-    question_answer = serializers.SlugRelatedField(
+
+    question_answers = serializers.SlugRelatedField(
+        many=True,
         queryset=QuestionAnswer.objects.all(),
         slug_field='public_id'
     )
@@ -115,8 +126,9 @@ class SubmitterAnswerSerializer(serializers.ModelSerializer):
         fields = [
             'public_id',
             'question',
+            'question_public_id',
             'answer',
-            'question_answer',
+            'question_answers',
         ]
         read_only_fields = ['public_id']
 
