@@ -25,7 +25,7 @@ class User(AbstractUser):
                                 unique=True,
                                 editable=False,
                                 validators=[UnicodeUsernameValidator()])
-    role = models.CharField(null=False, choices=USER_ROLES, max_length=255)
+    role = models.CharField(null=False, blank=False, choices=USER_ROLES, max_length=255)
 
     objects = CustomUserManager()
 

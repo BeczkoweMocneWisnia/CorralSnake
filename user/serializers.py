@@ -66,7 +66,8 @@ class CreateUserSerializer(UserSerializer):
                   'first_name',
                   'last_name',
                   'pfp',
-                  'password']
+                  'password',
+                  'role']
         extra_kwargs = {
             'password': {'write_only': True},
             'username': {'read_only': False},
@@ -77,5 +78,5 @@ class CreateUserSerializer(UserSerializer):
 class FriendSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['public_id', 'username', 'first_name', 'last_name', 'pfp']
-        read_only_fields = ('public_id', 'first_name', 'last_name', 'pfp')
+        fields = ['public_id', 'username', 'first_name', 'last_name', 'pfp', 'role']
+        read_only_fields = ('public_id', 'first_name', 'last_name', 'pfp', 'role')

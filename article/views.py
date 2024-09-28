@@ -5,6 +5,7 @@ from rest_framework.decorators import action
 from django.contrib.auth import get_user_model
 
 from user.permissions import TeacherOnly
+from .models import Article
 from .serializers import ArticleSerializer
 
 User = get_user_model()
@@ -12,7 +13,7 @@ User = get_user_model()
 
 class ArticleViewSet(viewsets.ModelViewSet):
     lookup_field = 'public_id'
-    queryset = User.objects.all().order_by('id')
+    queryset = Article.objects.all().order_by('id')
     filter_backends = [filters.SearchFilter]
     search_fields = ['title']
     serializer_class = ArticleSerializer
@@ -30,7 +31,9 @@ class ArticleViewSet(viewsets.ModelViewSet):
         """
         Retrieves an article by its public ID. Any authenticated user can access this.
         """
-        serializer = self.get_serializer(request.user)
+        article = self.get_object()
+
+        serializer = self.get_serializer(article)
         return Response(serializer.data)
 
     def list(self, request, *args, **kwargs):

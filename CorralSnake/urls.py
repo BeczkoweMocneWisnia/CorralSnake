@@ -30,6 +30,7 @@ urlpatterns = [
     path('auth/token/refresh/', TokenRefreshView.as_view()),
     path('user/', include('user.urls')),
     path('article/', include('article.urls')),
+    path('quiz/', include('quiz.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
