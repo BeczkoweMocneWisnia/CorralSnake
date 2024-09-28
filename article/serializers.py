@@ -11,7 +11,7 @@ User = get_user_model()
 class ArticleSerializer(serializers.ModelSerializer):
     author = FriendSerializer(many=False, read_only=True)
     author_pk = serializers.SlugRelatedField(
-        source='place', queryset=User.objects.all(), slug_field='pk', write_only=True
+        source='author', queryset=User.objects.all(), slug_field='pk', write_only=True
     )
 
     class Meta:
