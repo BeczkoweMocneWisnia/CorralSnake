@@ -22,7 +22,7 @@ class Quiz(models.Model):
 
 class Question(models.Model):
     public_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
-    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE)
+    quiz = models.ForeignKey(Quiz, on_delete=models.CASCADE, related_name='questions')
     title = models.CharField(max_length=255)
     description = models.TextField(max_length=10000)
     image = models.ImageField(upload_to=uuid_upload_to('questions/images'), null=True)
