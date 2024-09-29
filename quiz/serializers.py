@@ -163,7 +163,6 @@ class QuizFullSerializer(serializers.ModelSerializer):
             'author',
             'title',
             'description',
-            'image',
             'article',
             'questions',
             'question_answers',
