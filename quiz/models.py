@@ -15,7 +15,7 @@ QUESTION_TYPES = {
 class Quiz(models.Model):
     public_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     author = models.ForeignKey('user.User', on_delete=models.CASCADE)
-    article = models.ForeignKey('article.Article', on_delete=models.CASCADE)
+    article = models.ForeignKey('article.Article', on_delete=models.CASCADE, related_name='quizzes')
     title = models.CharField(max_length=255)
     description = models.TextField(max_length=10000)
 

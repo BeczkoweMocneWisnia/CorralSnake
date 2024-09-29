@@ -14,6 +14,8 @@ class ArticleSerializer(serializers.ModelSerializer):
         source='author', queryset=User.objects.all(), slug_field='pk', write_only=True
     )
 
+    quizzes_public_ids = serializers.SlugRelatedField(many=True, read_only=True, slug_field='public_id')
+
     class Meta:
         model = Article
         fields = ['public_id',
@@ -21,5 +23,6 @@ class ArticleSerializer(serializers.ModelSerializer):
                   'description',
                   'image',
                   'author',
-                  'author_pk']
+                  'author_pk',
+                  'quizzes_public_ids']
         read_only_fields = ['public_id']
