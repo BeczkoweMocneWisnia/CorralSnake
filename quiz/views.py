@@ -6,6 +6,7 @@ from quiz.serializers import QuizSerializer, QuestionSerializer, QuizFullSeriali
     SubmittedAnswerSerializer
 from user.permissions import TeacherOnly
 
+
 class QuizViewSet(viewsets.ModelViewSet):
     lookup_field = 'public_id'
     queryset = Quiz.objects.all().order_by('id')
@@ -14,7 +15,7 @@ class QuizViewSet(viewsets.ModelViewSet):
         """
         Creates a new quiz. Only accessible by users with the 'TeacherOnly' permission.
         """
-        serializer = self.get_serializer(data=dict(request.data) | {'author_pk': request.user.pk})
+        serializer = self.get_serializer(data=request.data.dict() | {'author_pk': request.user.pk})
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -34,7 +35,7 @@ class QuizViewSet(viewsets.ModelViewSet):
         quiz = self.get_object()
         if quiz.author != request.user:
             return Response(status=status.HTTP_401_UNAUTHORIZED)
-        serializer = self.get_serializer(quiz, data=dict(request.data) | {'author_pk': request.user.pk})
+        serializer = self.get_serializer(quiz, data=request.data.dict() | {'author_pk': request.user.pk})
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)
         return Response(serializer.data)
@@ -46,7 +47,7 @@ class QuizViewSet(viewsets.ModelViewSet):
         quiz = self.get_object()
         if quiz.author != request.user:
             return Response(status=status.HTTP_401_UNAUTHORIZED)
-        serializer = self.get_serializer(quiz, data=dict(request.data) | {'author_pk': request.user.pk}, partial=True)
+        serializer = self.get_serializer(quiz, data=request.data.dict() | {'author_pk': request.user.pk}, partial=True)
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)
         return Response(serializer.data)
