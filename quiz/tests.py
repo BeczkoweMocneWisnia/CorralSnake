@@ -27,7 +27,7 @@ class QuizTests(APITestCase):
             "article_public_id": article.public_id
         }
 
-        response = self.client.post('/quiz/', data, format='multipart')
+        response = self.client.post('/quiz/', data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Quiz.objects.count(), 1)
 
