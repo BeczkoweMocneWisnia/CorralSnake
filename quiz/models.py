@@ -35,7 +35,7 @@ class Question(models.Model):
 
 class QuestionAnswer(models.Model):
     public_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='possible_answers')
     value = models.CharField(max_length=255, blank=True, null=True)
     order = models.IntegerField(default=0)
 

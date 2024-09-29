@@ -46,6 +46,6 @@ class ArticleTests(APITestCase):
             "description": "Test",
         }
 
-        response = self.client.post('/article/', data, format='json')
+        response = self.client.post('/article/', data, format='multipart')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(Article.objects.count(), 1)

@@ -133,14 +133,30 @@ class SubmittedAnswerSerializer(SubmitterAnswerBasicSerializer):
         read_only_fields = ['public_id']
 
 
+class QuestionWithPossibleAnswersSerializer(QuestionBasicSerializer):
+    possible_answers = QuestionAnswerSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Question
+        fields = [
+            'public_id',
+            'title',
+            'description',
+            'image',
+            'question_type',
+            'answer',
+            'possible_answers'
+        ]
+        read_only_fields = ['public_id']
+
+
 class QuizFullSerializer(serializers.ModelSerializer):
     author = FriendSerializer(many=False, read_only=True)
     article = serializers.SlugRelatedField(
         queryset=Article.objects.all(),
         slug_field='public_id'
     )
-    questions = QuestionBasicSerializer(many=True, read_only=True)
-    question_answers = QuestionAnswerSerializer(many=True, read_only=True)
+    questions = QuestionWithPossibleAnswersSerializer(many=True, read_only=True)
 
     class Meta:
         model = Quiz
