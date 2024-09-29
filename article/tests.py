@@ -18,10 +18,10 @@ class ArticleTests(APITestCase):
 
     def test_create_article(self):
         student = User.objects.create_user(email='not@admin.com',
-                                                  username='testusertwo',
-                                                  password='testpasstwo',
-                                                  role=USER_ROLES["Student"]
-                                                  )
+                                           username='testusertwo',
+                                           password='testpasstwo',
+                                           role=USER_ROLES["Student"]
+                                           )
         self.client.force_authenticate(user=student)
 
         data = {
@@ -33,12 +33,12 @@ class ArticleTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
         self.assertEqual(Article.objects.count(), 0)
 
-    def test_create_bad_article(self):
+    def test_create_valid_article(self):
         student = User.objects.create_user(email='not@admin.com',
-                                                  username='testusertwo',
-                                                  password='testpasstwo',
-                                                  role=USER_ROLES["Teacher"]
-                                                  )
+                                           username='testusertwo',
+                                           password='testpasstwo',
+                                           role=USER_ROLES["Teacher"]
+                                           )
         self.client.force_authenticate(user=student)
 
         data = {

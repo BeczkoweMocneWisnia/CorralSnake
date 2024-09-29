@@ -86,6 +86,5 @@ class QuizTests(APITestCase):
         }
 
         response = self.client.post('/quiz/question/answer/submit/', data, format='json')
-        print(response.data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(SubmittedAnswer.objects.count(), 1)
