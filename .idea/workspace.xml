@@ -5,8 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="29fa2961-ec18-4b62-84fa-ece65cb01a9a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.env.dist" beforeDir="false" afterPath="$PROJECT_DIR$/.env.dist" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/quiz/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/quiz/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CorralSnake/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/CorralSnake/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,8 +149,8 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Django tests.Unnamed" />
       <item itemvalue="Django Server.DigitalLurker" />
+      <item itemvalue="Django tests.Unnamed" />
     </list>
   </component>
   <component name="SharedIndexes">
@@ -182,7 +183,7 @@
       <workItem from="1727518510691" duration="385000" />
       <workItem from="1727519043589" duration="14150000" />
       <workItem from="1727596865417" duration="1483000" />
-      <workItem from="1727600205150" duration="189000" />
+      <workItem from="1727600205150" duration="1289000" />
     </task>
     <servers />
   </component>

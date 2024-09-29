@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
 from datetime import timedelta
+from os import getenv
 from pathlib import Path
 from django.utils.translation import gettext_lazy as _
 
@@ -88,7 +89,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3030',
+    os.getenv('CORS_ADDRESS'),
 ]
 
 ROOT_URLCONF = 'CorralSnake.urls'
