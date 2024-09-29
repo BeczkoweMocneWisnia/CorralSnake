@@ -40,7 +40,7 @@ class QuizTests(APITestCase):
             "description": "Quiz desc",
             "quiz_public_id": quiz.public_id,
             "question_type": "S",
-            "answer": "30",
+            "question_answers_public_id": [],
             "order": 1
         }
 

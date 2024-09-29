@@ -27,7 +27,7 @@ class Question(models.Model):
     description = models.TextField(max_length=10000)
     image = models.ImageField(upload_to=uuid_upload_to('questions/images'), null=True)
     question_type = models.CharField(blank=False, null=False, choices=QUESTION_TYPES, max_length=255)
-    answer = models.CharField(max_length=255)
+    answer = models.CharField(max_length=255, blank=True, null=True)
     question_answers = models.ManyToManyField('QuestionAnswer', related_name='answers')
     order = models.IntegerField(default=0)
 
