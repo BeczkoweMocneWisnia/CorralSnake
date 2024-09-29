@@ -14,7 +14,7 @@ class ArticleSerializer(serializers.ModelSerializer):
         source='author', queryset=User.objects.all(), slug_field='pk', write_only=True
     )
 
-    quizzes_public_ids = serializers.SlugRelatedField(many=True, read_only=True, slug_field='public_id')
+    quizzes_public_ids = serializers.SlugRelatedField(many=True, read_only=True, slug_field='public_id', source='quizzes')
 
     class Meta:
         model = Article
