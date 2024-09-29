@@ -164,7 +164,6 @@ class QuizFullSerializer(serializers.ModelSerializer):
             'title',
             'description',
             'article',
-            'questions',
-            'question_answers',
+            'questions'
         ]
         read_only_fields = ['public_id']
