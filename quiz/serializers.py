@@ -28,7 +28,6 @@ class QuizSerializer(serializers.ModelSerializer):
             'author_pk',
             'title',
             'description',
-            'image',
             'article',
             'article_public_id'
         ]
