@@ -168,6 +168,6 @@ class QuizFullSerializer(serializers.ModelSerializer):
             'image',
             'article',
             'questions',
-            'question_answers'
+            'question_answers',
         ]
         read_only_fields = ['public_id']

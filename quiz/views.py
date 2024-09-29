@@ -15,7 +15,7 @@ class QuizViewSet(viewsets.ModelViewSet):
         """
         Creates a new quiz. Only accessible by users with the 'TeacherOnly' permission.
         """
-        serializer = self.get_serializer(data=request.data.dict() | {'author_pk': request.user.pk})
+        serializer = self.get_serializer(data=request.data | {'author_pk': request.user.pk})
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -35,7 +35,7 @@ class QuizViewSet(viewsets.ModelViewSet):
         quiz = self.get_object()
         if quiz.author != request.user:
             return Response(status=status.HTTP_401_UNAUTHORIZED)
-        serializer = self.get_serializer(quiz, data=request.data.dict() | {'author_pk': request.user.pk})
+        serializer = self.get_serializer(quiz, data=request.data | {'author_pk': request.user.pk})
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)
         return Response(serializer.data)
@@ -47,7 +47,7 @@ class QuizViewSet(viewsets.ModelViewSet):
         quiz = self.get_object()
         if quiz.author != request.user:
             return Response(status=status.HTTP_401_UNAUTHORIZED)
-        serializer = self.get_serializer(quiz, data=request.data.dict() | {'author_pk': request.user.pk}, partial=True)
+        serializer = self.get_serializer(quiz, data=request.data | {'author_pk': request.user.pk}, partial=True)
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)
         return Response(serializer.data)

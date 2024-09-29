@@ -18,7 +18,6 @@ class Quiz(models.Model):
     article = models.ForeignKey('article.Article', on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     description = models.TextField(max_length=10000)
-    image = models.ImageField(upload_to=uuid_upload_to('quiz/images'), null=True)
 
 
 class Question(models.Model):
