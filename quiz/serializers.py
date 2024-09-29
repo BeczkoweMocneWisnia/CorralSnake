@@ -141,7 +141,6 @@ class QuestionWithPossibleAnswersSerializer(QuestionBasicSerializer):
             'public_id',
             'title',
             'description',
-            'image',
             'question_type',
             'answer',
             'possible_answers'
